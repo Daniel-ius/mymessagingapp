@@ -13,7 +13,6 @@
 
 <script>
 import axios from "axios";
-
 export default {
   data() {
     return {
@@ -25,22 +24,17 @@ export default {
   },
   methods: {
     createMessage() {
-      // Use axios or another library to make a POST request to your backend's messages endpoint
+      this.newMessage.message=this.newMessage.message.replace(':)','😊')
       axios.post('http://localhost:8000/create_message', this.newMessage)
           .then(response => {
             console.log(response);
-            this.resetForm();
+            this.newMessage.message='';
+            this.newMessage.username='';
           })
           .catch(error => {
             console.log(error);
           });
     },
-    resetForm() {
-      this.newMessage = {
-        username: '',
-        message: ''
-      }
-    }
   }
 }
 </script>
